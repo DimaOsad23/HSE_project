@@ -28,7 +28,7 @@ for i in range(4, 26):
         en2 = time()
         med_t1 += en1 - st1
         med_t2 += en2 - st2
-        if sol1[1] != sol2[1]:
+        if sol1[1] != sol2[1] or sorted(sol1[0]) != sorted(sol2[0]):
             print('ERROR')
             print(coords)
             print(sol1)
