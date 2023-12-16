@@ -12,8 +12,6 @@ def convex_hull(coords):
         for i in range(1, len(hull_1)):
             if hull_1[i] != hull_1[i - 1]:
                 hull_2.append(hull_1[i])
-        print(hull_2)
-        print(sorted(upper_hull(coords, p1, p2)), coords, p1, p2)
         if len(hull_2) < 4:
             return coords
     return hull_2
