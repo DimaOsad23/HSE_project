@@ -381,6 +381,10 @@ class Work:
                 while k != quantity_points:
                     num = [round(uniform(range_random[0], range_random[1]), 1),
                            round(uniform(range_random[2], range_random[3]), 1)]
+                    if num[0] == range_random[1]:
+                        num[0] -= 0.1
+                    if num[1] == range_random[3]:
+                        num[1] -= 0.1
                     if not (num in self.coords):
                         k += 1
                         self.coords.append(num)

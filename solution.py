@@ -26,6 +26,7 @@ class Solution:
                         self.space_quadrilateral(coords[p_1], coords[p_2], coords[p_3], coords[p_4])
                         self.space_quadrilateral(coords[p_1], coords[p_3], coords[p_2], coords[p_4])
                         self.space_quadrilateral(coords[p_1], coords[p_4], coords[p_2], coords[p_3])
+        print(coords)
         return self.answer, self.space  # Передача ответа
 
     # Проверка на то, можно ли построить четырёхугольник по данным 4 точкам
