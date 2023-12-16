@@ -12,7 +12,9 @@ class Work:
 
     # Создание переменных класса (блок получился довольно большой)
     def __init__(self, root, pn_control, pn_graph, canvas):
-        self.coords = [] # Созданние переменной, хранящей координаты множества точек
+        self.coords = []
+
+ # Созданние переменной, хранящей координаты множества точек
         self.root = root  # Главное окно
         self.pn_control = pn_control  # Панель для кнопок
         self.pn_graph = pn_graph  # Панель для системы координат
@@ -730,6 +732,7 @@ class Work:
     # то есть на существование хотя бы одного четырёхугольника, который не самопересекается
     # Вызов решения обычным перебором
     def solution_of_task(self):
+        self.coords.sort()
         self.answer, self.space = self.solution.main(self.coords)
         if len(self.answer) == 0:
             showerror('Проблема', 'Невозможно построить четырёхугольник по заданным точкам.')

@@ -72,3 +72,28 @@ def test_upper_hull_3():
 def test_upper_hull_4():
     coords = [[-7.6, 6.2], [-4.4, 6.2], [-3.3, 4.9], [-1.3, 6.3]]
     assert sorted(upper_hull(coords, 0, 3)) == [[-1.3, 6.3]]
+
+def test_upper_hull_5():
+    coords = [[-6.0, 6.0], [-4.9, 6.0], [-4.0, 6.0]]
+    assert sorted(upper_hull(coords, 2, 0)) == [[-6.0, 6.0], [-4.9, 6.0]]
+
+def test_upper_hull_6():
+    coords = [[-6.0, 5.0], [-5.1, 5.0], [-3.9, 5.0], [-3.3, 5.0]]
+    assert sorted(upper_hull(coords, 3, 0)) == [[-6.0, 5.0], [-5.1, 5.0], [-3.9, 5.0]]
+
+def test_upper_hull_7():
+    coords = [[-6.0, 5.0], [-5.1, 5.0], [-3.9, 5.0], [-3.3, 5.0]]
+    assert sorted(upper_hull(coords, 2, 0)) == [[-6.0, 5.0], [-5.1, 5.0]]
+
+def test_upper_hull_8():
+    coords = [[-7.6, 6.2], [-4.4, 6.2], [-3.3, 4.9], [-1.3, 6.3]]
+    assert sorted(upper_hull(coords, 3, 0)) == [[-7.6, 6.2], [-3.3, 4.9]]
+
+def test_upper_hull_9():
+    coords = [[1, 1], [2, 2]]
+    assert sorted(upper_hull(coords, 0, 1)) == [[2, 2]]
+
+def test_upper_hull_10():
+    coords = [[1, 1], [2, 2]]
+    assert sorted(upper_hull(coords, 1, 0)) == [[1, 1]]
+
