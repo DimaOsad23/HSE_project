@@ -1,7 +1,7 @@
 # Импорт модуля для создания меню и запуска функциональной части
 from start import *
-from tkinter import *
 
+from tkinter import *
 
 try:
     root = Tk()
@@ -16,7 +16,7 @@ try:
     pn_graph.pack(side=RIGHT)
     # Создаётся и размещается холст для системы координат
     canvas = Canvas(pn_graph, height=640, width=640, bg='white',
-                                            highlightthickness=0)
+                    highlightthickness=0)
     canvas.place(height=640, width=640)
     # Запуск меню и функциональной части программы
     st = Start(root, pn_control, pn_graph, canvas)
