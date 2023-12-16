@@ -34,7 +34,7 @@ def test_convex_hull_6():
     coords = [[-8.0, 4.0], [-8.0, 5.0], [-8.0, 5.9], [-8.0, 8.0], [-6.2, 2.5], [-4.7, 7.7], [-4.1, 2.7], [-2.9, 5.6]]
     assert convex_hull(coords) == coords
 
-def test_conv7ex_hull_():
+def test_convex_hull_7():
     coords = [[-8.0, 4.0], [-8.0, 5.0], [-8.0, 5.9], [-8.0, 8.0], [-6.2, 2.5], [-5.0, 5.0], [-4.1, 2.7], [-2.9, 5.6]]
     assert convex_hull(coords) == [[-8.0, 4.0], [-8.0, 5.0], [-8.0, 5.9], [-8.0, 8.0], [-6.2, 2.5], [-4.1, 2.7], [-2.9, 5.6]]
 
@@ -48,4 +48,27 @@ def test_convex_hull_8():
                                            [-6.0, 6.0], [-5.6, 6.0], [-5.2, 6.0],
                                            [-4.9, 1.0], [-4.6, 6.0], [-2.0, 4.0]]
 
+def test_convex_hull_9():
+    for i in range(10):
+        coords = [[i, i]]
+        assert convex_hull(coords) == []
+
+def test_convex_hull_10():
+    coords = []
+    assert convex_hull(coords) == []
+
 def test_upper_hull_1():
+    coords = [[-6.0, 6.0], [-4.9, 6.0], [-4.0, 6.0]]
+    assert sorted(upper_hull(coords, 0, 2)) == [[-4.9, 6.0], [-4.0, 6.0]]
+
+def test_upper_hull_2():
+    coords = [[-6.0, 5.0], [-5.1, 5.0], [-3.9, 5.0], [-3.3, 5.0]]
+    assert sorted(upper_hull(coords, 0, 3)) == [[-5.1, 5.0], [-3.9, 5.0], [-3.3, 5.0]]
+
+def test_upper_hull_3():
+    coords = [[-6.0, 5.0], [-5.1, 5.0], [-3.9, 5.0], [-3.3, 5.0]]
+    assert sorted(upper_hull(coords, 0, 2)) == [[-5.1, 5.0], [-3.9, 5.0]]
+
+def test_upper_hull_4():
+    coords = [[-7.6, 6.2], [-4.4, 6.2], [-3.3, 4.9], [-1.3, 6.3]]
+    assert sorted(upper_hull(coords, 0, 3)) == [[-1.3, 6.3]]
