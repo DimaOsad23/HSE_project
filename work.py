@@ -30,13 +30,13 @@ class Work:
     :ivar canvas: this is where we store canvas object
     :vartype canvas: widget (Canvas)
     :ivar xmax: max value x coordinate if point (0, 0) in center
-    :vartype xmax: integer
+    :vartype xmax: int
     :ivar xmin: min value x coordinate if point (0, 0) in center
-    :vartype xmin: integer
+    :vartype xmin: int
     :ivar ymax: max value y coordinate if point (0, 0) in center
-    :vartype ymax: integer
+    :vartype ymax: int
     :ivar ymin: min value y coordinate if point (0, 0) in center
-    :vartype ymin: integer
+    :vartype ymin: int
     :ivar special_arg: canvas condition
     :vartype special_arg: integer (0 or 1 or 2)
     :note: 0 - coordinate system, 1 - 0 + points, 2 - 1 + answer
@@ -45,9 +45,9 @@ class Work:
     :ivar coord_x_y: place for write coordinates of cursor
     :vartype coord_x_y: widget (Label())
     :ivar delta_x: x-coordinate offset
-    :vartype delta_x: integer
+    :vartype delta_x: int
     :ivar delta_y: y-coordinate offset
-    :vartype delta_y: integer
+    :vartype delta_y: int
     :ivar solution: this is where we store functions with solution of task
     :vartype: instance of the Solution class
     :ivar answer: points for max space
@@ -57,9 +57,9 @@ class Work:
     :ivar red_point: point for editing
     :vartype red_point: list
     :ivar but3_coords_x: x coordinate of cursor (in the past moment)
-    :vartype but3_coords_x: integer
+    :vartype but3_coords_x: int
     :ivar but3_coords_y: y coordinate of cursor (in the past moment)
-    :vartype but3_coords_y: integer
+    :vartype but3_coords_y: int
     :ivar delta_mouse_x: x-coordinate offset from mouse
     :vartype delta_mouse_x: float
     :ivar delta_mouse_y: y-coordinate offset from mouse
@@ -111,6 +111,11 @@ class Work:
 
     # Методы для отрисовка системы координат
     def coord(self):
+        '''
+        Draw coordinate system
+
+        :returns: None
+        '''
         summ = -self.xmin + self.xmax
         # Рисование сетки
         for i in range(1, summ):
@@ -141,6 +146,13 @@ class Work:
                                self.delta_y / (2 * self.ymax))
 
     def create_text_x(self, coordinata):
+        '''
+        Write numbers on the x-axis
+
+        :param coordinata: y coordinate of text (in canvas coordinates)
+        :type coordinata: float
+        :returns: None
+        '''
         summ = -self.xmin + self.xmax
         for i in range(1, summ):
             if i - self.xmax + self.delta_x != 0:
@@ -161,6 +173,13 @@ class Work:
                 )
 
     def create_text_y(self, coordinata):
+        '''
+        Write numbers on the y-axis
+
+        :param coordinata: x coordinate of text (in canvas coordinates)
+        :type coordinata: float
+        :returns: None
+        '''
         summ = -self.ymin + self.ymax
         for i in range(1, summ):
             if -i - self.ymin + self.delta_y != 0:
@@ -181,6 +200,11 @@ class Work:
                 )
 
     def create_system_coord_x(self):
+        '''
+        Draw x-axis
+
+        :returns: None
+        '''
         summ = -self.xmin + self.xmax
         self.canvas.create_line(
             0,
@@ -208,6 +232,11 @@ class Work:
             )
 
     def create_system_coord_y(self):
+        '''
+        Draw y-axis
+
+        :returns: None
+        '''
         summ = -self.xmin + self.xmax
         self.canvas.create_line(
             320 - 320 * self.delta_x / self.xmax,
@@ -233,19 +262,37 @@ class Work:
                 width=1,
             )
 
-    def clear_coords(self):
-        while len(self.coords) != 0:
-            self.coords.pop()
-
     def quit(self):
-        res = askyesno("Exit", "Do you want to kill this window?")
+        '''
+        Ask the question about destroy window and if yes destroy
+
+        :returns: None
+        '''
+        res = askyesno("Выход", "Вы хотите закрыть окно?")
         if res:
             self.root.destroy()
 
     def moving_mouse(self, event):
+        '''
+        Take coordinates of cursor (in canvas) and call function
+        to change cursor label
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         self.change_cursor_label(event.x, event.y)
 
     def place_cursor_label(self, x, y):
+        '''
+        Place cursor label
+
+        :param x: x coordinate of cursor (in canvas)
+        :type x: int
+        :param y: y coordinate of cursor (in canvas)
+        :type y: int
+        :returns: None
+        '''
         size_x = self.coord_x_y.winfo_width()
         size_y = self.coord_x_y.winfo_height()
         if x + 80 <= 640 and y + size_y <= 640:
@@ -258,18 +305,47 @@ class Work:
             self.coord_x_y.place(x=x - size_x - 5, y=y - size_y - 5)
 
     def leave_canvas(self, event):
+        '''
+        Destroy cursor label and stop event if cursor not on canvas
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         self.coord_x_y.place_forget()
         self.canvas.unbind("<B3-Motion>")
 
     def enter_canvas(self, event):
+        '''
+        Start events to move CS and set focus on canvas
+        if cursor on canvas
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         self.canvas.bind("<B3-Motion>", self.mouse_move_coords_sys_move)
         self.canvas.bind("<Button-1>", lambda event: self.canvas.focus_set())
 
     def mouse_move_coords_sys_click(self, event):
+        '''
+        Takes new coordinates (in canvas) of cursor (in the past moment)
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         self.but3_coords_x = event.x
         self.but3_coords_y = event.y
 
     def mouse_move_coords_sys_move(self, event):
+        '''
+        Moving CS with the mouse and change cursor label
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         self.delta_mouse_x = self.delta_mouse_x + (
             self.but3_coords_x - event.x
         ) / 640 * (self.xmax - self.xmin)
@@ -287,9 +363,12 @@ class Work:
         self.place_cursor_label(self.but3_coords_x, self.but3_coords_y)
         self.draw_coords_mode()
 
-    # Изменение координат, отвечающих за рисование осей, при перемещении с
-    # помощью мышки
     def change_delta_mouse_coords(self):
+        '''
+        Change coordinates offsets if move CS with the mouse
+
+        :returns: None
+        '''
         if self.delta_mouse_x >= 1 and self.delta_x != 100 - self.xmax:
             self.delta_x += 1
             self.delta_mouse_x -= 1
@@ -308,6 +387,14 @@ class Work:
     # 1 - выведены точки
     # 2 - выведено решение
     def draw_coords_mode(self):
+        '''
+        Draw CS in different conditions
+        0 - CS
+        1 - CS and points
+        2 - CS and points and answer
+
+        :returns: None
+        '''
         self.clear_c()
         if self.special_arg == 1:
             self.draw_points()
@@ -338,6 +425,13 @@ class Work:
 
     # Блок событий для перемещения при помощи стрелок клавиатуры
     def left_ar(self, event):
+        '''
+        Moving CS with left arrow on keyboard
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         if self.delta_x != -100 - self.xmin:
             self.x_y.set(
                 "({}; {})".format(
@@ -349,6 +443,13 @@ class Work:
         self.draw_coords_mode()
 
     def right_ar(self, event):
+        '''
+        Moving CS with right arrow on keyboard
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         if self.delta_x != 100 - self.xmax:
             self.x_y.set(
                 "({}; {})".format(
@@ -360,6 +461,13 @@ class Work:
         self.draw_coords_mode()
 
     def down_ar(self, event):
+        '''
+        Moving CS with down arrow on keyboard
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         if self.delta_y != -100 - self.ymin:
             self.x_y.set(
                 "({}; {})".format(
@@ -371,6 +479,13 @@ class Work:
         self.draw_coords_mode()
 
     def up_ar(self, event):
+        '''
+        Moving CS with up arrow on keyboard
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         if self.delta_y != 100 - self.ymax:
             self.x_y.set(
                 "({}; {})".format(
@@ -383,6 +498,13 @@ class Work:
 
     # Изменение масштаба колёсиком мыши
     def mouse_wheel(self, event):
+        '''
+        Zooming with the mouse wheel
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         if event.delta == -120:
             self.xmax = min(self.xmax + 1, 15)
             self.xmin = max(self.xmin - 1, -15)
@@ -407,6 +529,15 @@ class Work:
     # Изменения лейбла координат (точнее координат в лейбле) при изменеии
     # масштаба
     def change_cursor_label(self, now_x, now_y):
+        '''
+        Change cursor label if zooming
+
+        :param now_x: x cursor coordinate (in canvas)
+        :type now_x: int
+        :param now_y: y cursor coordinate (in canvas)
+        :type now_y: int
+        :returns: None
+        '''
         x = round((now_x - 320) * self.xmax / 320 + self.delta_x, 1)
         y = round((320 - now_y) * self.ymax / 320 + self.delta_y, 1)
         self.x_y.set("({}; {})".format(x, y))
@@ -596,7 +727,7 @@ class Work:
                 )
             else:
                 if mode == "input":
-                    self.clear_coords()
+                    self.coords = []
                 k = 0
                 while k != quantity_points:
                     num = [
@@ -628,7 +759,7 @@ class Work:
         self.clear_all()
         self.special_arg = 1
         if mode == "input":
-            self.clear_coords()
+            self.coords = []
             self.keyboard_add()
         else:
             if len(self.coords) == 25:
@@ -727,7 +858,7 @@ class Work:
     def mouse(self, mode):
         self.clear_all()
         if mode == "input":
-            self.clear_coords()
+            self.coords = []
             self.mouse_add()
         else:
             if len(self.coords) == 25:
@@ -847,7 +978,7 @@ class Work:
                 )
             else:
                 if mode == "input":
-                    self.clear_coords()
+                    self.coords = []
                 for coordy in list_coords:
                     if coordy not in self.coords:
                         self.coords.append(coordy)
@@ -899,7 +1030,6 @@ class Work:
             selectforeground="black",
             highlightthickness=0,
             relief=FLAT,
-            selectmode=0,
             height=9,
         )
         for coords in self.coords:
@@ -913,8 +1043,8 @@ class Work:
         try:
             # Выбор файла для записи
             f = asksaveasfile(
-                filetypes=[("Text Document", "239yearpr/*.txt")],
-                defaultextension=[("Text Document", "239yearpr/*.txt")],
+                filetypes=[("Text Document", "*.txt")],
+                defaultextension="*.txt",
             )
             for coords in self.coords:
                 f.write(str(coords[0]) + " " + str(coords[1]) + "\n")

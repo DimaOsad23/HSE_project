@@ -82,6 +82,9 @@ class Start:
         :returns: None
         '''
         file_menu1 = Menu(self.main_menu, tearoff=0)
+        file_menu1.add_command(
+            label="Клавиатура", command=lambda: self.wrk.keyboard("input")
+        )
         file_menu1.add_command(label="Мышь",
                                command=lambda: self.wrk.mouse("input"))
         file_menu1.add_command(label="Файл",
