@@ -44,6 +44,8 @@ class Start:
         '''
         Call functions, that create menu and draw coordinate system,
         and star first events of canvas
+
+        :returns: None
         :seealso: menu_1, menu_2, menu_3, menu_4, menu_5, menu_6, Work
         '''
         self.menu_1()  # Создаётся пункт меню для ввода
@@ -76,6 +78,8 @@ class Start:
     def menu_1(self):
         '''
         Create input menu
+
+        :returns: None
         '''
         file_menu1 = Menu(self.main_menu, tearoff=0)
         file_menu1.add_command(label="Мышь",
@@ -89,6 +93,8 @@ class Start:
     def menu_2(self):
         '''
         Create output menu
+
+        :returns: None
         '''
         file_menu2 = Menu(self.main_menu, tearoff=0)
         file_menu2.add_command(label="Файл", command=self.wrk.output_file)
@@ -98,6 +104,8 @@ class Start:
     def menu_3(self):
         '''
         Create editing menu
+
+        :returns: None
         '''
         file_menu3 = Menu(self.main_menu, tearoff=0)
         file_menu3.add_command(
@@ -122,6 +130,8 @@ class Start:
     def menu_4(self):
         '''
         Create solution menu
+
+        :returns: None
         '''
         file_menu4 = Menu(self.main_menu, tearoff=0)
         file_menu4.add_command(
@@ -136,6 +146,8 @@ class Start:
     def menu_5(self):
         '''
         Create help menu
+
+        :returns: None
         '''
         help_menu = Menu(self.main_menu, tearoff=0)
         help_menu.add_command(label="Задача", command=self.wrk.task)
@@ -148,6 +160,8 @@ class Start:
     def menu_6(self):
         '''
         Create settings menu
+
+        :returns: None
         '''
         set_menu = Menu(self.main_menu, tearoff=0)
         set_menu.add_command(

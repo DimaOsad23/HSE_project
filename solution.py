@@ -8,8 +8,8 @@ class Solution:
 
     :ivar space: max space
     :vartype space: float (int)
-    :ivar space: points for max space
-    :vartype space: list
+    :ivar answer: points for max space
+    :vartype answer: list
     '''
 
     # Создание переменных класса
@@ -22,6 +22,7 @@ class Solution:
         '''
         Main function of solution, checking all variants of answer and find
         quadrilateral with max space
+
         :param coords: coordinates of a set of points
         :type coords: list
         :returns: points for max space and max space
@@ -167,7 +168,8 @@ class Solution:
         type p_3: list
         :param p_4: point 4
         type p_4: list
-        :note: if finds sequence of points with max space update max space
+        :returns: None
+        :note: if finds sequence of points with new max space update max space
         and points in answer
         '''
         if (

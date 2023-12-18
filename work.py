@@ -8,7 +8,65 @@ from solution import *
 
 
 class Work:
+    '''
+    Class with most of the functions, functional part of the project
 
+    :param root: main window
+    :type root: toplevel widget (instance of the Tk class)
+    :param pn_control: panel for buttons and other widgets
+    :type pn_control: widget (Frame)
+    :param pn_graph: panel for coordinate system
+    :type pn_graph: widget (Frame)
+    :param canvas: canvas for coordinate system and drawing
+    :type canvas: widget (Canvas)
+    :ivar coords: coordinates of a set of points
+    :vartype coords: list
+    :ivar root: this is where we store root object
+    :vartype root: toplevel widget (instance of the Tk class)
+    :ivar pn_control: this is where we store pn_control object
+    :vartype pn_control: widget (Frame)
+    :ivar pn_graph: this is where we store pn_graph object
+    :vartype pn_graph: widget (Frame)
+    :ivar canvas: this is where we store canvas object
+    :vartype canvas: widget (Canvas)
+    :ivar xmax: max value x coordinate if point (0, 0) in center
+    :vartype xmax: integer
+    :ivar xmin: min value x coordinate if point (0, 0) in center
+    :vartype xmin: integer
+    :ivar ymax: max value y coordinate if point (0, 0) in center
+    :vartype ymax: integer
+    :ivar ymin: min value y coordinate if point (0, 0) in center
+    :vartype ymin: integer
+    :ivar special_arg: canvas condition
+    :vartype special_arg: integer (0 or 1 or 2)
+    :note: 0 - coordinate system, 1 - 0 + points, 2 - 1 + answer
+    :ivar x_y: coordinates of cursor
+    :vartype x_y: StringVar()
+    :ivar coord_x_y: place for write coordinates of cursor
+    :vartype coord_x_y: widget (Label())
+    :ivar delta_x: x-coordinate offset
+    :vartype delta_x: integer
+    :ivar delta_y: y-coordinate offset
+    :vartype delta_y: integer
+    :ivar solution: this is where we store functions with solution of task
+    :vartype: instance of the Solution class
+    :ivar answer: points for max space
+    :vartype answer: list
+    :ivar space: max space
+    :vartype space: float (int)
+    :ivar red_point: point for editing
+    :vartype red_point: list
+    :ivar but3_coords_x: x coordinate of cursor (in the past moment)
+    :vartype but3_coords_x: integer
+    :ivar but3_coords_y: y coordinate of cursor (in the past moment)
+    :vartype but3_coords_y: integer
+    :ivar delta_mouse_x: x-coordinate offset from mouse
+    :vartype delta_mouse_x: float
+    :ivar delta_mouse_y: y-coordinate offset from mouse
+    :vartype delta_mouse_y: float
+    :ivar bg_color: bg color of window
+    :vartype bg_color: str
+    '''
     # Создание переменных класса (блок получился довольно большой)
     def __init__(self, root, pn_control, pn_graph, canvas):
         self.coords = []
@@ -1056,14 +1114,14 @@ class Work:
             y_coord = round(float(txt_y.get()), 1)
             if abs(x_coord) >= 100 or abs(y_coord) >= 100:
                 return 1 / 0
-            if not [x_coord, y_coord] in self.coords:
+            if [x_coord, y_coord] not in self.coords:
                 self.coords[self.coords.index(self.red_point)] = [
                     x_coord, y_coord]
                 self.editing()
             else:
                 showinfo(
                     "Информация",
-                    "Тточка с такими кооррдинатами уже существует.")
+                    "Точка с такими кооррдинатами уже существует.")
                 ent_x.delete(0, END)
                 ent_y.delete(0, END)
                 ent_x.focus()
