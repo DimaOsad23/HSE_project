@@ -4,10 +4,13 @@
 
 def convex_hull(coords):
     '''
+    Find convex hull of a set of points
 
-    :param coords: thr list with coordinates of points
+    :param coords: the list with coordinates of points
     :type coords: list
-    :return:
+    :returns: convex hull of a set of points
+    :rtype: list
+    :note: if length of convex hull is three return list with all points
     '''
     coords.sort()
     p1 = 0
@@ -34,6 +37,17 @@ def convex_hull(coords):
 
 #
 def upper_hull(coords, p1, p2):
+    '''
+    Find upper convex hull of a set of points
+
+    :param coords: the list with coordinates of points
+    :type coords: list
+    :param p1: index of the first point of upper convex hull
+    :type p1: int
+    :param p2: index of the last point of upper convex hull
+    :returns: upper convex hull of a set of points without first point
+    :rtype: list
+    '''
     sp = None
     step = (p2 - p1) // abs(p2 - p1)
     for p3 in range(p1 + 1 * step, p2, step):

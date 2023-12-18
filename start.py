@@ -5,6 +5,31 @@ from tkinter import *
 
 
 class Start:
+    '''
+    Class with functions that create menu and start processing of first events
+
+    :param root: main window
+    :type root: toplevel widget (instance of the Tk class)
+    :param pn_control: panel for buttons and other widgets
+    :type pn_control: widget (Frame)
+    :param pn_graph: panel for coordinate system
+    :type pn_graph: widget (Frame)
+    :param canvas: canvas for coordinate system and drawing
+    :type canvas: widget (Canvas)
+    :ivar root: this is where we store root object
+    :vartype root: toplevel widget (instance of the Tk class)
+    :ivar pn_control: this is where we store pn_control object
+    :vartype pn_control: widget (Frame)
+    :ivar pn_graph: this is where we store pn_graph object
+    :vartype pn_graph: widget (Frame)
+    :ivar canvas: this is where we store canvas object
+    :vartype canvas: widget (Canvas)
+    :ivar main_menu: main menu
+    :vartype main_menu: instance of the Menu class
+    :ivar wrk: this is where we store functional part of project (most of the
+    functions)
+    :vartype wrk: instance of the Work class
+    '''
     def __init__(self, root, pn_control, pn_graph, canvas):
         self.root = root
         self.pn_control = pn_control
@@ -16,6 +41,11 @@ class Start:
         self.wrk = Work(root, pn_control, pn_graph, canvas)
 
     def start(self):
+        '''
+        Call functions, that create menu and draw coordinate system,
+        and star first events of canvas
+        :seealso: menu_1, menu_2, menu_3, menu_4, menu_5, menu_6, Work
+        '''
         self.menu_1()  # Создаётся пункт меню для ввода
         self.menu_2()  # Создаётся пункт меню для вывода
         self.menu_3()  # Создаётся пункт меню для редактирования
@@ -44,6 +74,9 @@ class Start:
         self.wrk.coord()
 
     def menu_1(self):
+        '''
+        Create input menu
+        '''
         file_menu1 = Menu(self.main_menu, tearoff=0)
         file_menu1.add_command(label="Мышь",
                                command=lambda: self.wrk.mouse("input"))
@@ -54,12 +87,18 @@ class Start:
         self.main_menu.add_cascade(label="Ввод", menu=file_menu1)
 
     def menu_2(self):
+        '''
+        Create output menu
+        '''
         file_menu2 = Menu(self.main_menu, tearoff=0)
         file_menu2.add_command(label="Файл", command=self.wrk.output_file)
         file_menu2.add_command(label="Экран", command=self.wrk.output_screen)
         self.main_menu.add_cascade(label="Вывод", menu=file_menu2)
 
     def menu_3(self):
+        '''
+        Create editing menu
+        '''
         file_menu3 = Menu(self.main_menu, tearoff=0)
         file_menu3.add_command(
             label="Очистить экран",
@@ -81,6 +120,9 @@ class Start:
         self.main_menu.add_cascade(label="Редактирование", menu=file_menu3)
 
     def menu_4(self):
+        '''
+        Create solution menu
+        '''
         file_menu4 = Menu(self.main_menu, tearoff=0)
         file_menu4.add_command(
             label="Решение",
@@ -92,6 +134,9 @@ class Start:
         self.main_menu.add_cascade(label="Решение", menu=file_menu4)
 
     def menu_5(self):
+        '''
+        Create help menu
+        '''
         help_menu = Menu(self.main_menu, tearoff=0)
         help_menu.add_command(label="Задача", command=self.wrk.task)
         help_menu.add_command(label="Об авторе", command=self.wrk.author)
@@ -101,6 +146,9 @@ class Start:
         self.main_menu.add_cascade(label="Справка", menu=help_menu)
 
     def menu_6(self):
+        '''
+        Create settings menu
+        '''
         set_menu = Menu(self.main_menu, tearoff=0)
         set_menu.add_command(
             label="Цвет фона",
