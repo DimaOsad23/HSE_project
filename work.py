@@ -546,6 +546,11 @@ class Work:
     # Блок изменеия цвета фона программы (размещение цветных кнопок для выбора
     # цвета фона)
     def start_change_bg_color(self):
+        '''
+        Place button to change bg color
+
+        :returns: None
+        '''
         self.clear_all()
         lab = Label(
             self.pn_control,
@@ -585,12 +590,24 @@ class Work:
 
     # Изменение цвета фона
     def change_bg_color(self, bg_color):
+        '''
+        Set new bg color
+
+        :param bg_color: new bg color
+        :type bg_color: string
+        :returns: None
+        '''
         self.pn_control.config(bg=bg_color)
         self.bg_color = bg_color
         self.start_change_bg_color()
 
     # Вывод точек на систему координат
     def draw_points(self):
+        '''
+        Draw points on CS
+
+        :returns: None
+        '''
         for j in self.coords:
             self.canvas.create_oval(
                 320 + 320 / self.xmax * (float(j[0]) - self.delta_x),
@@ -606,6 +623,14 @@ class Work:
     # Insert - вставка
     # Определение режима и проверка
     def random(self, mode):
+        '''
+        Check mode of random-action and check number of points in list
+         if mode = insert
+
+        :param mode: mode of action
+        :type mode: str
+        :returns: None
+        '''
         self.clear_all()
         if mode == "input":
             self.random_range(mode)
@@ -621,6 +646,13 @@ class Work:
 
     # Ввод диапазонов значений
     def random_range(self, mode):
+        '''
+        Place buttons, entries and labels to input coordinate range
+
+        :param mode: mode of action
+        :type mode: str
+        :returns: None
+        '''
         txt_range_x = StringVar()
         txt_range_y = StringVar()
         lab_range_x = Label(
@@ -654,6 +686,17 @@ class Work:
 
     # Ввод количества задаваемых точек
     def quantity_rand_point(self, range_points, mode):
+        '''
+        Check for the correctness of ranges and place widgets to input
+        number of points
+
+        :param range_points: ranges of coordinates
+        :type range_points: list
+        :param mode: mode of action
+        :type mode: str
+        :returns: None
+        :note: if range is not correct show the message
+        '''
         try:
             range_random = [
                 round(float(range_points[0].split()[0]), 1),
@@ -700,6 +743,18 @@ class Work:
 
     # Ввод (добавление) точек
     def add_random(self, txt, range_random, mode):
+        '''
+        Input or insert points and show the message
+        about success or about mistake
+
+        :param txt: this is where we store number of points
+        :type txt: StringVar
+        :param range_random: ranges of coordinates
+        :type range_random: list
+        :param mode: mode of action
+        :type mode: str
+        :returns: None
+        '''
         try:
             quantity_points = int(txt.get())
             if (range_random[1] - range_random[0]) * (
@@ -756,6 +811,14 @@ class Work:
     # Insert - вставка
     # Определение режима и проверка
     def keyboard(self, mode):
+        '''
+        Check mode of keyboard-action and check number of points in list
+         if mode = insert
+
+        :param mode: mode of action
+        :type mode: str
+        :returns: None
+        '''
         self.clear_all()
         self.special_arg = 1
         if mode == "input":
@@ -774,6 +837,11 @@ class Work:
 
     # Ввод и добавление с клавиатуры
     def keyboard_add(self):
+        '''
+        Place widgets for input coordinates of points
+
+        :returns: None
+        '''
         txt_x = StringVar()
         txt_y = StringVar()
         lab_x = Label(
@@ -812,6 +880,20 @@ class Work:
 
     # Запись координат в массив
     def add_point(self, txt_x, txt_y, ent_x, ent_y):
+        '''
+        Add new points if coordinates is correct,
+        if coordinates is not correct show message
+
+        :param txt_x:
+        :type txt_x: StringVar
+        :param txt_y:
+        :type txt_x: StringVar
+        :param ent_x:
+        :type ent_x: widget (Entry)
+        :param ent_y:
+        :type ent_y: widget (Entry)
+        :returns: None
+        '''
         try:
             x_coord = round(float(txt_x.get()), 1)
             y_coord = round(float(txt_y.get()), 1)
@@ -856,6 +938,14 @@ class Work:
     # Insert - вставка
     # Определение режима и проверка
     def mouse(self, mode):
+        '''
+        Check mode of mouse-action and check number of points in list
+         if mode = insert
+
+        :param mode: mode of action
+        :type mode: str
+        :returns: None
+        '''
         self.clear_all()
         if mode == "input":
             self.coords = []
@@ -873,6 +963,11 @@ class Work:
 
     # Размещение виджетов при вводе и добавлении мышкой
     def mouse_add(self):
+        '''
+        Place widgets and start event of click and add point
+
+        :returns: None
+        '''
         self.special_arg = 1
         self.canvas.unbind("<Enter>")
         self.canvas.bind(
@@ -899,6 +994,13 @@ class Work:
 
     # Обработка нажатия при вводе и добавлении мышкой
     def click(self, event):
+        '''
+        Take coordinates of click and add new point
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         # Перевод координат
         x_coord = round((event.x - 320) * self.xmax / 320, 1)
         y_coord = round((320 - event.y) * self.ymax / 320, 1)
@@ -932,6 +1034,14 @@ class Work:
     # Insert - вставка
     # Определение режима и проверка
     def file(self, mode):
+        '''
+        Check mode of file-action and check number of points in list
+         if mode = insert
+
+        :param mode: mode of action
+        :type mode: str
+        :returns: None
+        '''
         self.clear_all()
         if mode == "input":
             self.open_file(mode)
@@ -947,6 +1057,14 @@ class Work:
 
     # Открытие и  чтение файла с записью координат в массив
     def open_file(self, mode):
+        '''
+        Open file and if coordinates and number of points are correct
+        add points, if not correct show message
+
+        :param mode: mode of action
+        :type mode: str
+        :returns: None
+        '''
         try:
             filename = askopenfilename()
             f = open(filename, "r")
@@ -999,6 +1117,11 @@ class Work:
 
     # Вывод координат на экран и проверка количества точек
     def output_screen(self):
+        '''
+        Output coordinates of points in window and draw points
+
+        :returns: None
+        '''
         self.clear_all()
         if len(self.coords) == 0:
             showinfo("Информация", "Нет точек")
@@ -1009,6 +1132,11 @@ class Work:
 
     # Вывод координат текстом
     def coords_output(self):
+        '''
+        Write coordinates of points in window
+
+        :returns: None
+        '''
         lab_coords = Label(
             self.pn_control,
             text="Координаты (x,y):",
@@ -1040,6 +1168,11 @@ class Work:
 
     # Вывод координат в файл
     def output_file(self):
+        '''
+        Output coordinates of points into the file
+
+        :returns: None
+        '''
         try:
             # Выбор файла для записи
             f = asksaveasfile(
@@ -1055,6 +1188,11 @@ class Work:
     # Блок методов очистки
     # Очистка всех панелей (привод программы к изначальному состоянию)
     def clear_all(self):
+        '''
+        Returns the window to its initial state
+
+        :returns: None
+        '''
         for wid in self.pn_control.winfo_children():
             wid.destroy()
         self.canvas.unbind("<Button-1>")
@@ -1068,17 +1206,32 @@ class Work:
 
     # Очистка панели кнопок
     def clear_pn_control(self):
+        '''
+        Destroy all widgets in panel for widgets (clear this panel)
+
+        :returns: None
+        '''
         for wid in self.pn_control.winfo_children():
             wid.destroy()
 
     # Очистка системы координат
     def clear_c(self):
+        '''
+        Returns the canvas ti its initial state
+
+        :returns: None
+        '''
         self.canvas.delete("all")
         self.coord()
 
     # Редактирование
     # Запуск выбора точек и проверка
     def editing(self):
+        '''
+        Draw points and start event to choose point for editing
+
+        :returns: None
+        '''
         self.clear_all()
         self.draw_points()
         # Меняется обработка событий, так как иначе будет два события на ЛКМ
@@ -1111,6 +1264,14 @@ class Work:
 
     # Начало обработка события по выбору точки для редактирования
     def edit_event(self, event):
+        '''
+        Check if click-point in list and start editing
+        if click-point in list
+
+        :param event: event
+        :type event: event
+        :returns: None
+        '''
         x_coord = round((event.x - 320) * self.xmax / 320, 1)
         y_coord = round((320 - event.y) * self.ymax / 320, 1)
         if [
@@ -1135,6 +1296,11 @@ class Work:
 
     # Создаются кнопки для выбора режима редактирования
     def edit_but(self):
+        '''
+        Place widgets to choose mode of editing
+
+        :returns: None
+        '''
         self.clear_pn_control()
         lab_info = Label(
             self.pn_control,
@@ -1175,6 +1341,11 @@ class Work:
 
     # Удаление выбранной точки
     def del_point(self):
+        '''
+        Delete selected point
+
+        :returns: None
+        '''
         self.coords.remove(self.red_point)
         self.red_point = []
         if len(self.coords) == 0:
@@ -1190,6 +1361,11 @@ class Work:
     # Блок замены точки
     # Создание полей и кнопок для ввода новых координат точки
     def change(self):
+        '''
+        Place widgets to input new coordinates
+
+        :returns: None
+        '''
         self.clear_pn_control()
         lab_info = Label(
             self.pn_control,
@@ -1239,6 +1415,19 @@ class Work:
 
     # Замена точки с проверками
     def change_point(self, txt_x, txt_y, ent_x, ent_y):
+        '''
+        Change point if coordinates are correct
+
+        :param txt_x: new x coordinate
+        :type txt_x: StringVar
+        :param txt_y: new y coordinate
+        :type txt_y: StringVar
+        :param ent_x: this is where we write new x coordinate
+        :type ent_x: widget (Entry)
+        :param ent_y: this is where we write new y coordinate
+        :type ent_y: widget (Entry)
+        :returns: None
+        '''
         try:
             x_coord = round(float(txt_x.get()), 1)
             y_coord = round(float(txt_y.get()), 1)
@@ -1264,12 +1453,22 @@ class Work:
 
     # Отмена выбора точки
     def cancel_point(self):
+        '''
+        Cancel the selection
+
+        :returns: None
+        '''
         self.red_point = []
         self.editing()
 
     # Блок информации (справки)
     # Вывод условия задачи
     def task(self):
+        '''
+        Show message with the task
+
+        :returns: None
+        '''
         showinfo(
             "Задача",
             ("На плоскости задано множество точек. Найти из них такие"
@@ -1279,10 +1478,20 @@ class Work:
 
     # Вывод имени и класса втора
     def author(self):
+        '''
+        Show the message with information about author
+
+        :returns: None
+        '''
         showinfo("Автор", "Осадчий Дмитрий Александрович, БИБ231")
 
     # Вывод информации про перемещение по плоскости
     def moving(self):
+        '''
+        Show message with information about moving CS
+
+        :returns: None
+        '''
         showinfo(
             "Перемещение",
             ("Перемещение по плоскости осуществляется при помощи"
@@ -1292,6 +1501,11 @@ class Work:
     # Блок вывода решения
     # Вызов решения обычным перебором
     def solution_of_task(self):
+        '''
+        Call solution of the task and output solution in the window
+
+        :returns: None
+        '''
         self.coords.sort()
         self.answer, self.space = self.solution.main(self.coords)
         if len(self.answer) == 0:
@@ -1308,6 +1522,12 @@ class Work:
 
     # Вызов решения перебором по выпуклой оболочке
     def solution_2_of_task(self):
+        '''
+        Call solution (with convex hull) of the task
+        and output solution in the window
+
+        :returns: None
+        '''
         self.answer, self.space = self.solution.main(convex_hull(self.coords))
         if len(self.answer) == 0:
             showerror(
@@ -1322,6 +1542,13 @@ class Work:
             self.draw_solution(self.answer)
 
     def draw_solution(self, solution):
+        '''
+        Draw quadrilateral from answer
+
+        :param solution: vertices of the quadrilateral
+        :type solution: list
+        :returns: None
+        '''
         self.canvas.create_line(
             320 + 320 / self.xmax * (float(solution[0][0]) - self.delta_x),
             320 - 320 / self.ymax * (float(solution[0][1]) - self.delta_y),
@@ -1350,6 +1577,11 @@ class Work:
         self.write_answer()
 
     def write_answer(self):
+        '''
+        Write answer in the window (panel of widgets)
+
+        :returns: None
+        '''
         text_answer = "Ответ:"
         text_coords = (
             "Координаты вершин четырёхугольника:\n"
