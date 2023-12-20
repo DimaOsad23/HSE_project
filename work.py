@@ -735,7 +735,7 @@ class Work:
                 command=lambda: self.add_random(txt, range_random, mode),
             )
             but_range.place(width=160, x=160, height=40, y=100)
-        except BaseException:
+        except Exception:
             showerror(
                 "Неверный формат",
                 ("Неверный формат. Проверьте, что диапозоны аргументов"
@@ -799,7 +799,7 @@ class Work:
                         self.coords.append(num)
                 self.clear_pn_control()
                 showinfo("Информация", "Координаты введены")
-        except BaseException:
+        except Exception:
             showerror(
                 "Неверный формат",
                 ("Неверный формат. Проверьте, что "
@@ -927,7 +927,7 @@ class Work:
                     ("Ввод завершён, так как введёно максимально"
                      " допустимое количество точек (25)."),
                 )
-        except BaseException:
+        except Exception:
             showerror(
                 "Неверный формат", "Проверьте "
                                    "правильно ли введены координаты точек."
@@ -1110,7 +1110,7 @@ class Work:
                 ("Неверные координаты в файле. Координаты"
                  " должны лежать в диапозоне (-100, 100)."),
             )
-        except BaseException:
+        except Exception:
             showerror(
                 "Неверный формат",
                 "Проверьте правильный ли формат файла и координат в нём.",
@@ -1183,7 +1183,7 @@ class Work:
             for coords in self.coords:
                 f.write(str(coords[0]) + " " + str(coords[1]) + "\n")
             f.close()
-        except BaseException:
+        except Exception:
             pass
 
     # Блок методов очистки
@@ -1445,7 +1445,7 @@ class Work:
                 ent_x.delete(0, END)
                 ent_y.delete(0, END)
                 ent_x.focus()
-        except BaseException:
+        except Exception:
             showerror(
                 "Неверный фоормат",
                 "Проверьте правильно ли введены координаты. \
