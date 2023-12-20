@@ -38,10 +38,11 @@ for i in range(4, 26):
     t1.append(med_t1 / k)
     t2.append(med_t2 / k)
 plt.subplot(211)
-plt.plot(ox, t1, color="r")
-plt.plot(ox, t2, color="g")
+plt.plot(ox, t1)
+plt.plot(ox, t2)
 t2 = []
 ox = []
+
 for i in range(4, 50):
     ox.append(i)
     med_t2 = 0
@@ -60,4 +61,6 @@ for i in range(4, 50):
     t2.append(med_t2 / k)
 plt.subplot(212)
 plt.plot(ox, t2)
+
+
 plt.show()
