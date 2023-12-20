@@ -30,6 +30,7 @@ class Start:
     functions)
     :vartype wrk: instance of the Work class
     '''
+
     def __init__(self, root, pn_control, pn_graph, canvas):
         self.root = root
         self.pn_control = pn_control

@@ -68,6 +68,7 @@ class Work:
     :vartype bg_color: str
     '''
     # Создание переменных класса (блок получился довольно большой)
+
     def __init__(self, root, pn_control, pn_graph, canvas):
         self.coords = []
 
