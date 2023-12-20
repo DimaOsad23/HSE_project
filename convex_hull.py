@@ -12,6 +12,7 @@ def convex_hull(coords):
     :rtype: list
     :note: if length of convex hull is three return list with all points
     '''
+
     coords.sort()
     p1 = 0
     p2 = len(coords) - 1
@@ -48,6 +49,7 @@ def upper_hull(coords, p1, p2):
     :returns: upper convex hull of a set of points without first point
     :rtype: list
     '''
+
     sp = None
     step = (p2 - p1) // abs(p2 - p1)
     for p3 in range(p1 + 1 * step, p2, step):

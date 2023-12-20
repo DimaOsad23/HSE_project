@@ -6,7 +6,8 @@ from tkinter import *
 
 class Start:
     '''
-    Class with functions that create menu and start processing of first events
+    Class with functions that create menu and start processing of first
+    events
 
     :param root: main window
     :type root: toplevel widget (instance of the Tk class)
@@ -26,8 +27,8 @@ class Start:
     :vartype canvas: widget (Canvas)
     :ivar main_menu: main menu
     :vartype main_menu: instance of the Menu class
-    :ivar wrk: this is where we store functional part of project (most of the
-    functions)
+    :ivar wrk: this is where we store functional part of project (most
+    of the functions)
     :vartype wrk: instance of the Work class
     '''
 
@@ -49,6 +50,7 @@ class Start:
         :returns: None
         :seealso: menu_1, menu_2, menu_3, menu_4, menu_5, menu_6, Work
         '''
+
         self.menu_1()  # Создаётся пункт меню для ввода
         self.menu_2()  # Создаётся пункт меню для вывода
         self.menu_3()  # Создаётся пункт меню для редактирования
@@ -82,6 +84,7 @@ class Start:
 
         :returns: None
         '''
+
         file_menu1 = Menu(self.main_menu, tearoff=0)
         file_menu1.add_command(
             label="Клавиатура", command=lambda: self.wrk.keyboard("input")
@@ -100,6 +103,7 @@ class Start:
 
         :returns: None
         '''
+
         file_menu2 = Menu(self.main_menu, tearoff=0)
         file_menu2.add_command(label="Файл", command=self.wrk.output_file)
         file_menu2.add_command(label="Экран", command=self.wrk.output_screen)
@@ -111,6 +115,7 @@ class Start:
 
         :returns: None
         '''
+
         file_menu3 = Menu(self.main_menu, tearoff=0)
         file_menu3.add_command(
             label="Очистить экран",
@@ -137,6 +142,7 @@ class Start:
 
         :returns: None
         '''
+
         file_menu4 = Menu(self.main_menu, tearoff=0)
         file_menu4.add_command(
             label="Решение",
@@ -153,6 +159,7 @@ class Start:
 
         :returns: None
         '''
+
         help_menu = Menu(self.main_menu, tearoff=0)
         help_menu.add_command(label="Задача", command=self.wrk.task)
         help_menu.add_command(label="Об авторе", command=self.wrk.author)
@@ -167,6 +174,7 @@ class Start:
 
         :returns: None
         '''
+
         set_menu = Menu(self.main_menu, tearoff=0)
         set_menu.add_command(
             label="Цвет фона",

@@ -3,6 +3,7 @@ from start import *
 
 from tkinter import *
 
+
 try:
     root = Tk()
     root.resizable(width=False, height=False)

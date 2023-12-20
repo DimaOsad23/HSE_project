@@ -48,7 +48,8 @@ class Work:
     :vartype delta_x: int
     :ivar delta_y: y-coordinate offset
     :vartype delta_y: int
-    :ivar solution: this is where we store functions with solution of task
+    :ivar solution: this is where we store functions with solution
+    of task
     :vartype: instance of the Solution class
     :ivar answer: points for max space
     :vartype answer: list
@@ -67,8 +68,8 @@ class Work:
     :ivar bg_color: bg color of window
     :vartype bg_color: str
     '''
-    # Создание переменных класса (блок получился довольно большой)
 
+    # Создание переменных класса (блок получился довольно большой)
     def __init__(self, root, pn_control, pn_graph, canvas):
         self.coords = []
 
@@ -117,6 +118,7 @@ class Work:
 
         :returns: None
         '''
+
         summ = -self.xmin + self.xmax
         # Рисование сетки
         for i in range(1, summ):
@@ -154,6 +156,7 @@ class Work:
         :type coordinata: float
         :returns: None
         '''
+
         summ = -self.xmin + self.xmax
         for i in range(1, summ):
             if i - self.xmax + self.delta_x != 0:
@@ -181,6 +184,7 @@ class Work:
         :type coordinata: float
         :returns: None
         '''
+
         summ = -self.ymin + self.ymax
         for i in range(1, summ):
             if -i - self.ymin + self.delta_y != 0:
@@ -206,6 +210,7 @@ class Work:
 
         :returns: None
         '''
+
         summ = -self.xmin + self.xmax
         self.canvas.create_line(
             0,
@@ -238,6 +243,7 @@ class Work:
 
         :returns: None
         '''
+
         summ = -self.xmin + self.xmax
         self.canvas.create_line(
             320 - 320 * self.delta_x / self.xmax,
@@ -269,6 +275,7 @@ class Work:
 
         :returns: None
         '''
+
         res = askyesno("Выход", "Вы хотите закрыть окно?")
         if res:
             self.root.destroy()
@@ -282,6 +289,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         self.change_cursor_label(event.x, event.y)
 
     def place_cursor_label(self, x, y):
@@ -294,6 +302,7 @@ class Work:
         :type y: int
         :returns: None
         '''
+
         size_x = self.coord_x_y.winfo_width()
         size_y = self.coord_x_y.winfo_height()
         if x + 80 <= 640 and y + size_y <= 640:
@@ -313,6 +322,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         self.coord_x_y.place_forget()
         self.canvas.unbind("<B3-Motion>")
 
@@ -325,6 +335,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         self.canvas.bind("<B3-Motion>", self.mouse_move_coords_sys_move)
         self.canvas.bind("<Button-1>", lambda event: self.canvas.focus_set())
 
@@ -336,6 +347,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         self.but3_coords_x = event.x
         self.but3_coords_y = event.y
 
@@ -347,6 +359,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         self.delta_mouse_x = self.delta_mouse_x + (
             self.but3_coords_x - event.x
         ) / 640 * (self.xmax - self.xmin)
@@ -370,6 +383,7 @@ class Work:
 
         :returns: None
         '''
+
         if self.delta_mouse_x >= 1 and self.delta_x != 100 - self.xmax:
             self.delta_x += 1
             self.delta_mouse_x -= 1
@@ -396,6 +410,7 @@ class Work:
 
         :returns: None
         '''
+
         self.clear_c()
         if self.special_arg == 1:
             self.draw_points()
@@ -433,6 +448,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         if self.delta_x != -100 - self.xmin:
             self.x_y.set(
                 "({}; {})".format(
@@ -451,6 +467,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         if self.delta_x != 100 - self.xmax:
             self.x_y.set(
                 "({}; {})".format(
@@ -469,6 +486,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         if self.delta_y != -100 - self.ymin:
             self.x_y.set(
                 "({}; {})".format(
@@ -487,6 +505,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         if self.delta_y != 100 - self.ymax:
             self.x_y.set(
                 "({}; {})".format(
@@ -506,6 +525,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         if event.delta == -120:
             self.xmax = min(self.xmax + 1, 15)
             self.xmin = max(self.xmin - 1, -15)
@@ -527,8 +547,8 @@ class Work:
         self.change_cursor_label(event.x, event.y)
         self.draw_coords_mode()
 
-    # Изменения лейбла координат (точнее координат в лейбле) при изменеии
-    # масштаба
+    # Изменения лейбла координат (точнее координат в лейбле)
+    # при изменеии масштаба
     def change_cursor_label(self, now_x, now_y):
         '''
         Change cursor label if zooming
@@ -539,19 +559,21 @@ class Work:
         :type now_y: int
         :returns: None
         '''
+
         x = round((now_x - 320) * self.xmax / 320 + self.delta_x, 1)
         y = round((320 - now_y) * self.ymax / 320 + self.delta_y, 1)
         self.x_y.set("({}; {})".format(x, y))
         self.place_cursor_label(now_x, now_y)
 
-    # Блок изменеия цвета фона программы (размещение цветных кнопок для выбора
-    # цвета фона)
+    # Блок изменеия цвета фона программы (размещение цветных кнопок
+    # для выбора цвета фона)
     def start_change_bg_color(self):
         '''
         Place button to change bg color
 
         :returns: None
         '''
+
         self.clear_all()
         lab = Label(
             self.pn_control,
@@ -598,6 +620,7 @@ class Work:
         :type bg_color: string
         :returns: None
         '''
+
         self.pn_control.config(bg=bg_color)
         self.bg_color = bg_color
         self.start_change_bg_color()
@@ -609,6 +632,7 @@ class Work:
 
         :returns: None
         '''
+
         for j in self.coords:
             self.canvas.create_oval(
                 320 + 320 / self.xmax * (float(j[0]) - self.delta_x),
@@ -632,6 +656,7 @@ class Work:
         :type mode: str
         :returns: None
         '''
+
         self.clear_all()
         if mode == "input":
             self.random_range(mode)
@@ -654,6 +679,7 @@ class Work:
         :type mode: str
         :returns: None
         '''
+
         txt_range_x = StringVar()
         txt_range_y = StringVar()
         lab_range_x = Label(
@@ -698,6 +724,7 @@ class Work:
         :returns: None
         :note: if range is not correct show the message
         '''
+
         try:
             range_random = [
                 round(float(range_points[0].split()[0]), 1),
@@ -756,6 +783,7 @@ class Work:
         :type mode: str
         :returns: None
         '''
+
         try:
             quantity_points = int(txt.get())
             if (range_random[1] - range_random[0]) * (
@@ -763,7 +791,8 @@ class Work:
             ) * 100 < quantity_points:  # Надо домножить на 100 л ч
                 showerror(
                     "Проблема",
-                    "Нельзя задать такое количество точек в данном диапазоне.",
+                    ("Нельзя задать такое количество "
+                     "точек в данном диапазоне."),
                 )
             elif quantity_points <= 0:
                 showerror(
@@ -820,6 +849,7 @@ class Work:
         :type mode: str
         :returns: None
         '''
+
         self.clear_all()
         self.special_arg = 1
         if mode == "input":
@@ -843,6 +873,7 @@ class Work:
 
         :returns: None
         '''
+
         txt_x = StringVar()
         txt_y = StringVar()
         lab_x = Label(
@@ -895,6 +926,7 @@ class Work:
         :type ent_y: widget (Entry)
         :returns: None
         '''
+
         try:
             x_coord = round(float(txt_x.get()), 1)
             y_coord = round(float(txt_y.get()), 1)
@@ -929,8 +961,9 @@ class Work:
                 )
         except Exception:
             showerror(
-                "Неверный формат", "Проверьте "
-                                   "правильно ли введены координаты точек."
+                "Неверный формат",
+                ("Проверьте правильно ли введены "
+                 "координаты точек."),
             )
 
     # Ввод и вставка при помощи мышки
@@ -947,6 +980,7 @@ class Work:
         :type mode: str
         :returns: None
         '''
+
         self.clear_all()
         if mode == "input":
             self.coords = []
@@ -969,6 +1003,7 @@ class Work:
 
         :returns: None
         '''
+
         self.special_arg = 1
         self.canvas.unbind("<Enter>")
         self.canvas.bind(
@@ -1002,6 +1037,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         # Перевод координат
         x_coord = round((event.x - 320) * self.xmax / 320, 1)
         y_coord = round((320 - event.y) * self.ymax / 320, 1)
@@ -1043,6 +1079,7 @@ class Work:
         :type mode: str
         :returns: None
         '''
+
         self.clear_all()
         if mode == "input":
             self.open_file(mode)
@@ -1066,6 +1103,7 @@ class Work:
         :type mode: str
         :returns: None
         '''
+
         try:
             filename = askopenfilename()
             f = open(filename, "r")
@@ -1123,11 +1161,12 @@ class Work:
 
         :returns: None
         '''
+
         self.clear_all()
         if len(self.coords) == 0:
             showinfo("Информация", "Нет точек")
         else:
-            self.draw_points()  # Вывод точек в системе координат
+            self.draw_points()
             self.special_arg = 1
             self.coords_output()
 
@@ -1138,6 +1177,7 @@ class Work:
 
         :returns: None
         '''
+
         lab_coords = Label(
             self.pn_control,
             text="Координаты (x,y):",
@@ -1174,6 +1214,7 @@ class Work:
 
         :returns: None
         '''
+
         try:
             # Выбор файла для записи
             f = asksaveasfile(
@@ -1194,6 +1235,7 @@ class Work:
 
         :returns: None
         '''
+
         for wid in self.pn_control.winfo_children():
             wid.destroy()
         self.canvas.unbind("<Button-1>")
@@ -1212,16 +1254,18 @@ class Work:
 
         :returns: None
         '''
+
         for wid in self.pn_control.winfo_children():
             wid.destroy()
 
     # Очистка системы координат
     def clear_c(self):
         '''
-        Returns the canvas ti its initial state
+        Returns the canvas in its initial state
 
         :returns: None
         '''
+
         self.canvas.delete("all")
         self.coord()
 
@@ -1233,9 +1277,11 @@ class Work:
 
         :returns: None
         '''
+
         self.clear_all()
         self.draw_points()
-        # Меняется обработка событий, так как иначе будет два события на ЛКМ
+        # Меняется обработка событий, так как иначе будет два события
+        # на ЛКМ
         self.canvas.unbind("<Enter>")
         self.canvas.bind(
             "<Enter>",
@@ -1244,7 +1290,8 @@ class Work:
             ),
         )
         if len(self.coords) == 0:
-            showerror("Ошибка редактирования", "Нет точек для редактирования.")
+            showerror("Ошибка редактирования",
+                      "Нет точек для редактирования.")
         else:
             self.special_arg = 1
             lab = Label(
@@ -1273,6 +1320,7 @@ class Work:
         :type event: event
         :returns: None
         '''
+
         x_coord = round((event.x - 320) * self.xmax / 320, 1)
         y_coord = round((320 - event.y) * self.ymax / 320, 1)
         if [
@@ -1302,6 +1350,7 @@ class Work:
 
         :returns: None
         '''
+
         self.clear_pn_control()
         lab_info = Label(
             self.pn_control,
@@ -1347,6 +1396,7 @@ class Work:
 
         :returns: None
         '''
+
         self.coords.remove(self.red_point)
         self.red_point = []
         if len(self.coords) == 0:
@@ -1367,6 +1417,7 @@ class Work:
 
         :returns: None
         '''
+
         self.clear_pn_control()
         lab_info = Label(
             self.pn_control,
@@ -1429,6 +1480,7 @@ class Work:
         :type ent_y: widget (Entry)
         :returns: None
         '''
+
         try:
             x_coord = round(float(txt_x.get()), 1)
             y_coord = round(float(txt_y.get()), 1)
@@ -1448,8 +1500,9 @@ class Work:
         except Exception:
             showerror(
                 "Неверный фоормат",
-                "Проверьте правильно ли введены координаты. \
-            Значения координат должны лежать в диапозоне (-100, 100).",
+                ("Проверьте правильно ли введены координаты. \n"
+                 "Значения координат должны лежать"
+                 " в диапозоне (-100, 100)."),
             )
 
     # Отмена выбора точки
@@ -1459,6 +1512,7 @@ class Work:
 
         :returns: None
         '''
+
         self.red_point = []
         self.editing()
 
@@ -1470,6 +1524,7 @@ class Work:
 
         :returns: None
         '''
+
         showinfo(
             "Задача",
             ("На плоскости задано множество точек. Найти из них такие"
@@ -1484,6 +1539,7 @@ class Work:
 
         :returns: None
         '''
+
         showinfo("Автор", "Осадчий Дмитрий Александрович, БИБ231")
 
     # Вывод информации про перемещение по плоскости
@@ -1493,6 +1549,7 @@ class Work:
 
         :returns: None
         '''
+
         showinfo(
             "Перемещение",
             ("Перемещение по плоскости осуществляется при помощи"
@@ -1507,6 +1564,7 @@ class Work:
 
         :returns: None
         '''
+
         self.coords.sort()
         self.answer, self.space = self.solution.main(self.coords)
         if len(self.answer) == 0:
@@ -1529,6 +1587,7 @@ class Work:
 
         :returns: None
         '''
+
         self.answer, self.space = self.solution.main(convex_hull(self.coords))
         if len(self.answer) == 0:
             showerror(
@@ -1550,6 +1609,7 @@ class Work:
         :type solution: list
         :returns: None
         '''
+
         self.canvas.create_line(
             320 + 320 / self.xmax * (float(solution[0][0]) - self.delta_x),
             320 - 320 / self.ymax * (float(solution[0][1]) - self.delta_y),
@@ -1583,6 +1643,7 @@ class Work:
 
         :returns: None
         '''
+
         text_answer = "Ответ:"
         text_coords = (
             "Координаты вершин четырёхугольника:\n"
